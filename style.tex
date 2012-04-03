@@ -1,0 +1,133 @@
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{xltxtra} %加入了一些针对xetex的改进，并且加入了\XeTeX 命令来输入漂亮的xetex logo
+\usepackage{pdfpages}
+\usepackage{listings}
+
+
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usetikzlibrary{arrows}
+\usepackage{fontspec}
+\setsansfont[Mapping=tex-text,LetterSpace=-1.0]{DejaVu Sans}	 %设置无衬线字体
+\setmainfont[Mapping=tex-text,LetterSpace=-1.0]{WenQuanYi ZenHei} %正文默认字体，衬线字体
+\setmonofont{DejaVu Sans Mono}
+%\usepackage[CJKchecksingle,normalindentfirst,CJKnumber,BoldFont,SlantFont]{xeCJK}
+%\usepackage{XeCJK}
+
+
+
+%%Mac OS X
+%中文设置
+%\setCJKmainfont[Scale=1.2,BoldFeatures={FakeBold=2}]{STXihei}
+%\setCJKmonofont[Scale=1.2,BoldFeatures={FakeBold=2},FakeStretch=1.11686]{STXihei}
+%\setCJKfamilyfont{usong}{STSong}
+%\setCJKfamilyfont{ufang}{STFangsong}
+%\setCJKfamilyfont{ukai}{STKaiti}
+%\setCJKfamilyfont{uhei}{STHeiti}
+
+\newcommand{\song}{\CJKfamily{usong}}
+\newcommand{\fang}{\CJKfamily{ufang}}
+\newcommand{\kai}{\CJKfamily{ukai}}
+\newcommand{\hei}{\CJKfamily{uhei}}
+
+
+%%Linux Variant 
+%\setsansfont[Mapping=tex-text,BoldFont={sans}]{sans}
+%\setmainfont[Mapping=tex-text,BoldFont={sans}]{sans}
+\setromanfont{Arial}
+%\setromanfont[BoldFont={Apple LiGothic Medium}, BoldFont={Apple LiSung Light}]{STXihei}
+%\setmonofont[Scale=0.8]{AppleGothic Regular}
+%\setmonofont{Luxi Mono}
+\setromanfont{Times New Roman}
+%\setromanfont{Arial}
+\hypersetup{unicode=true,
+ %bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=true,pdfborder={0 0 0},colorlinks=true,
+ pdfauthor={赵卫国},
+ pdfsubject={Linux},
+ pdfkeywords={Linux,系统管理,安全,iptables,shell,awk,grep,sed}}
+ 
+\XeTeXlinebreaklocale "zh"  % 表示用中文的断行
+\XeTeXlinebreakskip = 0pt plus 1pt % 多一点调整的空间
+\renewcommand{\baselinestretch}{1.2} %调整行间距
+%%%%%
+ %W/o导航条:default, boxes, Bergen, Madrid, Pittsburgh, Rochester
+%带树形导航条:Antibes, JuanLesPins, Montpellier。
+% 带目录(TOC)的侧边导航条:         Berkeley, PaloAlto, Goettingen, Marburg,  Hannover。
+%带微型frame导航条:Berlin, Ilmenau, Dresden, Darmstadt, Frankfurt, Singapore, Szeged。
+%带节小节标题: Copenhagen, Luebeck, Malmoe, Warsaw。
+
+%%%定义主题
+\usetheme[]{Luebeck}
+\usecolortheme{default}
+\usefonttheme{default}
+\useinnertheme{default}
+\useoutertheme{default}
+
+
+%\useoutertheme[footline=authorinstituetitle,subsection=true]{miniframes}
+%\useinnertheme{circles}
+%\usefonttheme[only large]{structurebold}
+%
+%\setbeamercolor{sidebar right}{bg=black!15}
+%\setbeamercolor{structure}{fg=blue}
+%\setbeamercolor{author}{parent=structure}
+%
+%\setbeamerfont{title}{series=\normalfont,size=\LARGE}
+%\setbeamerfont{title in sidebar}{series=\bfseries}
+%\setbeamerfont{author in sidebar}{series=\bfseries}
+%\setbeamerfont*{item}{series=}
+%\setbeamerfont{frametitle}{size=}
+%\setbeamerfont{block title}{size=\small}
+%\setbeamerfont{subtitle}{size=\normalsize,series=\normalfont}
+
+\setbeamertemplate{navigation symbols}{} %取消导航条
+%\setbeamertemplate{sidebar top}
+%{
+%  {\usebeamerfont{title in sidebar}%
+%    \vskip1.5em%
+%    \hskip3pt%
+%    \usebeamercolor[fg]{title in sidebar}%
+%    \insertshorttitle[width=2cm-6pt,center,respectlinebreaks]\par%
+%    \vskip1.25em%
+%  }%
+%  {%
+%    \hskip3pt%
+%    \usebeamercolor[fg]{author in sidebar}%
+%    \usebeamerfont{author in sidebar}%
+%    \insertshortauthor[width=2cm-2pt,center,respectlinebreaks]\par%
+%    \vskip1.25em%
+%  }%
+%  \hbox to2cm{\hss\insertlogo\hss}
+%  \vskip1.25em%
+%  \insertverticalnavigation{2cm}%
+%  \vfill
+%}%
+
+%\setbeamertemplate{title page}
+%{
+%  \vbox{}
+%  \vskip1em
+% % {\huge Kapitel \insertshortlecture\par}
+%  {\usebeamercolor[fg]{title}\usebeamerfont{title}\inserttitle\par}%
+%  \vskip0pt plus1filll
+%  \leftskip=0pt plus1fill\insertauthor\par
+%  \insertinstitute\vskip1em
+%}
+
+%\logo{\includegraphics[width=1cm]{images/rflogo.jpg}}
+
+
+\title{Linux技术交流}
+
+\author{赵卫国  \\ \textit{wgzhao@kingbase.com.cn}}
+
+\institute[BaseSoft]{工程中心 服务一部}
+
+
+\date{\today}
+
+% 除掉以下命令的注解 "%" 后, 许多环境都会自动逐段显示
+%\beamerdefaultoverlayspecification{<+->}
+

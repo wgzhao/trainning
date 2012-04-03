@@ -1,0 +1,14 @@
+digraph G {
+	graph [layout=dot ]
+	
+	demo [shape=record, label="iptables |<f1> -t filter -A INPUT |  <f3> -s 192.168.1.2 |<f5> -j DROP"];
+	node [shape=none];
+	ck -> demo:f1;
+	demo:f3 -> pattern [dir=back];
+	demo:f5 -> target [dir=back];
+	ruler -> demo:f3:ne ;
+	ck [label="ruler check point"];
+	pattern [ label="ruler match"];
+	target [label="ruler target"];
+
+}

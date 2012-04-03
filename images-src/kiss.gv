@@ -1,0 +1,4 @@
+digraph kiss
+	{
+		kiss [shape=box, penwidth=4, fontsize=24, label="K.I.S.S\n Keep It Simple,Stupid",margin="0.1,0.1"];
+	}

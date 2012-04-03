@@ -1,0 +1,15 @@
+digraph "Linux boot flowwork"
+	{
+		labelloc=b;
+		node [shape=box,style=filled,fillcolor=orange,color=white, fontsize=16];
+		"BIOS/EFI" -> "Lilo/Grub/elilo" -> "Kernel boot" -> init -> mingetty -> shell;
+		init->"rc.sysinit";
+		init:e -> rc:w;
+		node [style="invis"];
+		shell -> uselinux [ label="use Linux"];
+		power -> "BIOS/EFI" [label="power on"];
+		{rank=same; power; "BIOS/EFI"};
+		{rank = same; shell; uselinux};
+		{rank = same; init; "rc.sysinit"; }
+		{rank = same; mingetty; rc};
+	}

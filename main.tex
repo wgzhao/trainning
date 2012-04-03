@@ -1,0 +1,42 @@
+%trans 适合幻灯片显示(默认) handout适合讲义
+%notes=hide/show/only 适用于笔记。隐藏注释(默认），为pdf screen添加注释，仅产生pdf注释
+\documentclass[compress,notes]{beamer}
+\input{style.tex}
+\graphicspath{{images/}}
+%\includeonly{shell-scripting}
+\begin{document}
+\begin{comment}
+	:Title: 培训文档的主控文档
+	:Slug: main
+	:Tags: 培训 linux
+	
+	这是所有培训文档的主控文档，用来确定需要包含哪些章节.
+	
+	| Author: wgzhao,wgzhao@kingbase.com.cn
+
+\end{comment}
+
+\begin{frame}
+	\titlepage 
+\end{frame}
+
+\begin{frame}[shrink]{Outline}
+	\tableofcontents[subsectionstyle=hide]  %[pausesections]
+	
+\end{frame}
+
+%\input{company_and_product}
+\include{whoami}
+\include{axs3-install}
+%\input{profile}
+\include{sysadmin}
+%\include{procfs}
+\include{advance}
+%\include{network-services}
+\include{security}
+%\include{troubleshooting}
+\include{shell-scripting}
+%\include{zen-linux}
+\include{perferences}
+\include{thanks}
+\end{document}

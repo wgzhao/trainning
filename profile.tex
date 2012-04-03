@@ -1,0 +1,273 @@
+%linux概述
+\section{Linux概览}
+
+
+
+\begin{frame}[shrink]{Linux概览}
+	\tableofcontents[currentsection]
+\end{frame}
+
+
+\subsection{Linux起源}
+
+\begin{frame}{Linux起源}
+\begin{itemize}
+\item 1984：GNU项目和自由软件基金（Free Software Foundation,FSF)
+
+\begin{itemize}
+\item 创建UNIX工具的开源版本
+\item 创建通用公共授权（General Public License,GPL)
+\end{itemize}
+
+\item 软件必须开源
+
+\item 1991：Linus Torvalds
+
+\begin{itemize}
+\item 创建开源，类UNIX的内核，以GPL方式发布
+\item 移植一些GNU工具，网上征求援助
+\end{itemize}
+\item 今天：
+
+\begin{itemize}
+\item Linux kernel + GNU 工具 = 完整的，开源的类UNIX的操作系统
+\end{itemize}
+
+
+\end{itemize}
+
+\end{frame}
+
+\subsection{红旗发行版}
+
+
+\begin{frame}{红旗(RedFlag)发行版}
+\begin{itemize}
+\item Linux发行版是基于Linux内核的操作系统
+\item 红旗服务器操作系统
+
+\begin{itemize}
+\item 稳定，经过完整测试的软件
+\item 专业的支持服务
+\item 针对大型网络的集中管理工具
+\end{itemize}
+\item Qomo项目
+
+\begin{itemize}
+\item 更多，更新的应该程序
+\item 社区支持（非红旗官方支持）
+\item 针对个人系统
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\subsection{Linux原则}
+
+
+\begin{frame}{Linux原则}
+
+
+\begin{itemize}
+\item 所有对象,包括硬件都是文件
+\item 配置数据以文本形式保存 
+\item 由短小的单目的程序构成 
+\item 避免不必要的用户交互 
+\item 可使用多个程序合作完成复杂任务
+\end{itemize}
+
+\end{frame}
+
+\section{Linux使用基础}
+
+
+\begin{frame}{Linux使用基础}
+%	\begin{exampleblock}{目标}
+%	\begin{itemize}
+%		\item 登录系统
+%		\item 从终端启动X
+%		\item 从X访问命令行
+%		\item 修改密码
+%		\item 理解root特权的性质
+%		\item 提升你的权限
+%		\item 编辑纯文本文件
+%	\end{itemize}
+%	\end{exampleblock}
+\center \includegraphics[scale=.6]{images/tux.png}
+
+\end{frame}
+
+\subsection{登录Linux系统}
+
+\begin{frame}{登录系统}
+\begin{itemize}
+\item 两种登录屏幕类型：虚拟终端（基于文本）和图形化登录（称为显示管理器）
+\item 使用登录帐号和密码登录
+\item 每一个用户都有自己的主目录用来保存个人文件
+\end{itemize}
+
+\end{frame}
+
+\subsection{虚拟终端和图形界面切换}
+
+
+\begin{frame}{虚拟终端和图形界面切换}
+\begin{itemize}
+\item 通常Linux运行6个虚拟终端和一个图形终端
+\item 在虚拟终端之间切换，按下：\\
+Ctrl+Alt+F\emph{{[}1 - 6{]}}
+\item 访问图形终端，按下：Ctrl+Alt+F7
+\end{itemize}
+
+\end{frame}
+
+\subsection{改变密码}
+
+
+\begin{frame}{改变密码 }
+\begin{itemize}
+\item 密码控制访问系统
+
+\begin{itemize}
+\item 首次登录时应该修改密码
+\item 此后，要经常修改密码
+\item 选择难于猜测的字符串作为密码
+\end{itemize}
+\item 图形下：
+\item 终端下：passwd
+\end{itemize}
+
+\end{frame}
+
+\subsection{root账户}
+
+
+\begin{frame}{root账户}
+\begin{itemize}
+\item root账户：特殊的管理员帐号
+
+\begin{itemize}
+\item 也被称为超级用户(superuser)
+\item root有着完全控制系统和彻底摧毁系统的能力
+\end{itemize}
+\item 如无必要，不要使用root登录
+\end{itemize}
+
+\end{frame}
+
+\subsection{改变身份}
+
+
+\begin{frame}{改变身份}
+\begin{itemize}
+\item su - 为root帐号创建新的shell环境
+\item sudo \emph{command} 用root账户运行命令
+
+\begin{itemize}
+\item 需要先前配置/etc/sudoers
+\end{itemize}
+\item id 显示当前用户的信息
+\end{itemize}
+
+\end{frame}
+
+\section{运行命令及获取帮助}
+
+
+\begin{frame}{运行命令和获取帮助}
+
+目标：
+\begin{itemize}
+\item 在提示符下执行命令
+\item 解释某些简单命令的使用帮助摘要
+\item 学会如何使用系统内置的帮助资源
+\end{itemize}
+
+\end{frame}
+
+\subsection{运行命令}
+
+
+\begin{frame}{运行命令}
+\begin{itemize}
+\item 运行的命令一般是下面的语法：
+
+\begin{itemize}
+\item command \textit{options} \textit{arguments}
+\end{itemize}
+\item 每一项用空格隔开
+\item Options 可以修改命令的行为
+
+\begin{itemize}
+\item 单字母选项一般用-表示，可以每一个选项单独给出，也可以联合
+\item -a -b -c or -abc
+\item 完整单词的选项一般用--表示
+\item -{}-help -{}-usage
+\end{itemize}
+\item Arguments 可以是命令需要的文件名或者其他数据
+\item 一行中的多个命令可以使用 ; 分隔
+\end{itemize}
+
+\end{frame}
+
+\subsection{获取帮助}
+
+
+\begin{frame}{获取帮助}
+\begin{itemize}
+\item 不必试着记住所有的指令及用法
+\item 多层帮助
+
+\begin{itemize}
+\item whatis
+\item \textit{command} -{}-help
+\item man , info
+\item /usr/share/doc
+\item 红旗文档
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{whatis命令}
+\begin{itemize}
+\item 显示一个命令的简短描述
+\item 使用的数据库每日更新
+\item 一般情况下，系统刚安装后无效
+\item \$ whatis cal\\
+cal (1) - displays a calendar and the date of easter
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{-{}-help 选项}
+\begin{itemize}
+\item 显示用法摘要和参数列表
+\item 大部分命令都有此参数
+\item  
+	\begin{verbatim}
+	$mount --help
+	
+	Usage: mount -V : print version
+		mount -h : print this help
+		mount : list mounted filesystems	
+		mount -l : idem, including volume labels
+	\end{verbatim}
+	\ldots{} \ldots{}
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}{阅读用法摘要}
+\begin{itemize}
+\item 通过-{}-help,man和其他方式打印出用法摘要
+\item 用于描述命令的语法
+	\begin{itemize}
+		\item \emph{[ {} ]} 里的参数表示可选
+		\item {<} {>}或者大写的参数表示是变量
+		\item 文本后接 \ldots{} 的表示列表重复
+		\item $x | y | z$ 表示“x或y或z”
+		\item -abc 意思是-a,-b,-c的任意混合
+	\end{itemize}
+\end{itemize}
+\end{frame}

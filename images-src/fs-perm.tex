@@ -1,0 +1,116 @@
+\documentclass{beamer}
+
+\usepackage{tikz}
+\usepackage{amsmath}
+\usetikzlibrary{arrows}
+\usepackage{verbatim}
+\usepackage{fontspec}
+\setsansfont{STXihei}
+\begin{document}
+\pagestyle{empty}
+
+% For every picture that defines or uses external nodes, you'll have to
+% apply the 'remember picture' style. To avoid some typing, we'll apply
+% the style to all pictures.
+\tikzstyle{every picture}+=[remember picture]
+
+% By default all math in TikZ nodes are set in inline mode. Change this to
+% displaystyle so that we don't get small fractions.
+\everymath{\displaystyle}
+
+
+
+
+ \tikz\node [fill=blue!20,draw,circle] (n1) {}; 文件的类型 $-$=普通文件 , $d$= 表示目录，$l$=  链接文件 \\
+        
+  \hspace{5mm} \tikz\node [fill=red!20,draw,circle] (n2) {}; 文件属主权限:r=可读,w=可写,x=可执行,-=无权限 \\
+        
+ \hspace{10mm} \tikz\node [fill=orange!20,draw,circle] (n3) {}; 成员组权限 \\
+            
+  \hspace{15mm} \tikz\node [fill=yellow!20,draw,circle] (n4) {};  其他用户权限 \\
+     	
+  \hspace{20mm} \tikz\node [fill=green!20,draw,circle] (n5) {}; 链接到文件或者目录的个数	    
+     	
+
+
+% Below we mix an ordinary equation with TikZ nodes. Note that we have to
+% adjust the baseline of the nodes to get proper alignment with the rest of
+% the equation.
+
+
+\begin{tikzpicture}
+
+%\foreach \x [evaluate=\x as \shade using \x*10] in {1,...,10}
+%{
+%  \node [ fill=red!\shade!yellow, minimum size=0.65mm] at (\x,0) (t\x) {\x};
+%  
+%  }
+
+\end{tikzpicture}  
+
+\begin{equation}
+        \tikz[baseline]{
+            \node [fill=blue!20,anchor=base] (t1)
+            {\underline{-}};
+        } 
+        \tikz[baseline]{
+            \node[fill=red!20,anchor=base] (t2)
+            {\underline{rw-}};
+        } 
+        \tikz[baseline]{
+            \node[fill=green!20,anchor=base] (t3)
+            {\underline{r--}};
+        }
+        \tikz[baseline]{
+        		\node[fill=yellow!20,anchor=base] (t4)
+        		{\underline{r-x}};
+        	}
+        	\tikz[baseline]{
+        		\node[fill=green!20,anchor=base] (t5)
+        		{\underline{4}};
+        	}
+        	 \tikz[baseline]{
+        		\node[fill=green!20,anchor=base] (t6)
+        		{\underline{root}};
+        	}
+   	    \tikz[baseline]{
+        		\node[fill=green!20,anchor=base] (t7)
+        		{\underline{wheel}};
+        	}      
+ 	  	\tikz[baseline]{
+        		\node[fill=green!20,anchor=base] (t8)
+        		{\underline{8237}};
+        	}       
+   	\tikz[baseline]{
+        		\node[fill=green!20,anchor=base] (t9)
+        		{\underline{02-23 21:39 2010}};
+        	}      	        
+   	\tikz[baseline]{
+        		\node[fill=green!20,anchor=base] (t10)
+        		{\underline{test.txt}};
+        	}        
+\end{equation}
+
+
+
+文件的属主 \tikz\node[fill=purple!20,draw,circle] (n6) {};   \\
+文件属于的组 \tikz\node[fill=blue!20,draw,circle] (n7) {};   \\
+文件大小 \tikz\node[fill=cyan!20,draw,circle] (n8) {};   \\
+日期 \tikz\node[fill=green!40,draw,circle] (n9) {};   \\
+文件名 \tikz\node[fill=yellow!40,draw,circle] (n10) {}; 
+
+
+% Now it's time to draw some edges between the global nodes. Note that we
+% have to apply the 'overlay' style.
+\begin{tikzpicture}[overlay]
+\foreach \x in {1,...,10}
+	{
+		\path[densely dotted,->] (n\x) edge [bend right] (t\x);
+	}
+%        \path[->] (n1) edge [bend right] (t1);
+%        \path[->] (n2) edge [bend right] (t2);
+%        \path[->] (n3) edge [out=0, in=-90] (t3);
+%        \path [->] (n4) edge [bend right] (t4);
+\end{tikzpicture}
+
+\end{document}

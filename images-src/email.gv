@@ -1,0 +1,20 @@
+digraph G {
+	concentrate = true;
+	ranksep=0.5;
+	edge [labelfloat=false];
+	node [shape=box];
+	dns -> MTA [dir=back, label="2: UDP",labelangle=30];
+	MTA -> MUA [dir=back, minilen=4,label="1: SMTP"];
+	MTA -> MTAprime [label="3: SMTP"];
+	MTAprime -> MDA [label="4", minilen=4];
+	MRA -> MUAprime [dir=back, label="6 imap(s) or pop3(s)"];
+	MRA -> spool [label="7"];
+	MDA -> spool [label="5"];
+	{rank = same; MTA; MTAprime; MDA}
+	{rank = same; MRA; spool;}
+	{rank = same; MUA; MUAprime}
+	MTAprime [ label="MTA"];
+	MUAprime [ label="MUA"];
+	dns [label="DNS\n MX Records"];
+	spool [shape=ellipse];
+}

@@ -1,0 +1,12 @@
+/*
+file permission demo
+*/
+digraph fileperm
+	{
+		nodesep=.5;
+		node [ shape=record, width=.1, height=.1];
+		node0 [ label="<d> - | <pu> rw- | <pg> r-- |<po> r-x |<num> 4 | <u> root | <g> wheel | <size> 8237 | <date> 02-23\ 21:39\ 2010 | <name> test.txt" ];
+		node [ shape=none];
+		dexp [label="file's type, - = regular file, d = directory, l = symbol link "];
+		node0:d->dexp:w;
+	}

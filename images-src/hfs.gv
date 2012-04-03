@@ -1,0 +1,12 @@
+digraph hfs
+	{
+		label="Linux Hierarchical File System (a.k.a HFS)";
+		node [ shape=plaintext];
+		"/" -> {root; home; bin; sbin; usr; lib; "......"};
+		home -> wgzhao;
+		usr ->{share;lib2; include; bin2; sbin2};
+		{rank =same; share;lib2; include; bin2; sbin2; wgzhao};
+		lib2 [label="lib"];
+		bin2 [label="bin"];
+		sbin2 [label="sbin"];
+	}

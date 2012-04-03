@@ -1,0 +1,239 @@
+<HTML
+><HEAD
+><TITLE
+>Init script Functions</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE="Linux Standard Base Work In Progress 20030624"
+HREF="book1.html"><LINK
+REL="UP"
+TITLE="System Initialization"
+HREF="sysinit.html"><LINK
+REL="PREVIOUS"
+TITLE="Script names"
+HREF="scrptnames.html"></HEAD
+><BODY
+CLASS="SECT1"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Linux Standard Base Work In Progress 20030624</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="scrptnames.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 3. System Initialization</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+>&nbsp;</TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="INISCRPTFUNC">Init script Functions</H1
+><P
+>Each LSB-compliant init.d script must source the file
+/lib/lsb/init-functions.  This file must cause the following shell
+script commands to be defined.  This can be done either by adding a
+directory to the PATH variable which defines these commands, or by
+defining sh aliases.  While the distribution-provided aliases may
+choose to use bash extensions (at the distribution's option), the LSB
+init.d files themselves should only depend in /bin/sh features as
+defined by POSIX.2.</P
+><P
+></P
+><TABLE
+BORDER="1"
+><TBODY
+><TR
+><TD
+>start_daemon [-f] [-n nicelevel] [-p pidfile] pathname [args]</TD
+><TD
+>This runs the specified program as a daemon.
+start_daemon will check to see if there is a program
+named "daemon" already running.  If so, it will not
+start another copy of the daemon unless the -f
+option is given. The -n option specifies a nice
+level. See nice(1).
+start_daemon should return the LSB defined exit status codes. It
+shall return 0 if the program has been successfully started or
+is running and not 0 otherwise.</TD
+></TR
+><TR
+><TD
+>killproc [-p pidfile] pathname [signal]</TD
+><TD
+>This stops the specified program. The program is
+found using the algorithm given by pidofproc. If a
+signal is specified, using the
+-<TT
+CLASS="REPLACEABLE"
+><I
+>signal_name</I
+></TT
+> or
+-<TT
+CLASS="REPLACEABLE"
+><I
+>signal_number</I
+></TT
+> syntaxes
+specified by the <B
+CLASS="COMMAND"
+>kill</B
+> command,
+the program is sent that signal.
+Otherwise, a SIGTERM followed by a SIGKILL
+after some number of seconds is sent.
+Compliant applications may use the basename instead of the
+pathname.
+killproc should return the LSB defined exit status codes. If called
+without a signal, it shall return 0 if the program has been stopped or
+is not running and not 0 otherwise. If a signal is given, it shall return 0
+only if the program is running. </TD
+></TR
+><TR
+><TD
+>pidofproc [-p pidfile] pathname</TD
+><TD
+>This function returns one or more pid(s) for a particular
+daemon. If an entry is found in
+/var/run/basename.pid, then that value is returned.
+If the -p option is used, the given pidfile is used instead.
+Compliant applications may use the basename instead of the
+pathname.
+Compliant implementations of the LSB may attempt
+other mechanisms for determining the pid(s),
+although this is not required (and not
+recommended, since a user can trick startup scripts
+by creating processes that appear to be system
+programs in the process list thus creating a
+potential security exposure).  Hence, LSB-complaint
+applications who wish to use the pidofproc function
+in their init scripts must store the pid in
+/var/run/basename.pid.
+pidofproc should return the LSB defined exist status
+codes for "status". It shall return 0 if the program is
+the process is running and not 0 otherwise.</TD
+></TR
+><TR
+><TD
+>log_success_msg "message"</TD
+><TD
+>This requests the distribution to print a success
+message.  The message should be relatively short; no
+more than 60 characters is highly desirable.</TD
+></TR
+><TR
+><TD
+>log_failure_msg "message"</TD
+><TD
+>This requests the distribution to print a failure
+message.  The message should be relatively short; no
+more than 60 characters is highly desirable.</TD
+></TR
+><TR
+><TD
+>log_warning_msg "message"</TD
+><TD
+>This requests the distribution to print a warning
+message.  The message should be relatively short; no
+more than 60 characters is highly desirable.</TD
+></TR
+></TBODY
+></TABLE
+><P
+></P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="scrptnames.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="book1.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>&nbsp;</TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Script names</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="sysinit.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>&nbsp;</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

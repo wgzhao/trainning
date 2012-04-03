@@ -1,0 +1,229 @@
+%简单的介绍了Linux的基本使用，登陆，图形和文字的切换，账号之间的切换等
+\section{linux基本使用}
+
+\begin{frame}{Linux基础教程}{30分钟学会Linux}
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{images/basic/tux}
+\end{center}
+\end{frame}
+
+
+\subsection{登录系统}
+
+
+\begin{frame}{登录系统}
+\begin{itemize}
+\item login: 输入账户(比如root)
+\item password: 输入密码,密码不回显,也不是显示{*}号
+\item \# 表示超级用户(root)
+\item \$ 表示普通用户
+\item exit/CTRL+D 注销
+\item poweroff/shutdown/init 0 关机
+\end{itemize}
+
+\end{frame}
+
+\subsection{操作技巧}
+
+
+\begin{frame}{操作技巧}
+\begin{itemize}
+\item 命令历史记录 history(/etc/profile)
+
+
+\pause{\noindent }
+
+\item 自动补全（TAB键）
+
+
+\pause{}
+
+\item 命令别名 alias (\textasciitilde{}/.bashrc \textasciitilde{}/.bash\_aliases)
+
+
+\pause{}
+
+\item 鼠标复制和粘贴（滚轮或者左右键）
+\end{itemize}
+
+\end{frame}
+
+\subsection{在文件和目录中游走}
+
+
+\begin{frame}{列出文件和目录}
+
+\begin{tabular}{ll}
+\hline 
+ls & 列出文件和目录\tabularnewline
+ls -a & 列出所有文件和目录（包括隐藏文件）\tabularnewline
+mkdir \emph{dir} & 创建目录\tabularnewline
+cd dir & 改变当前目录到dir\tabularnewline
+cd \textasciitilde{} & 改变当前目录到用户主目录\tabularnewline
+cd .. & 改变当前目录到上一级目录\tabularnewline
+pwd & 显示当前目录\tabularnewline
+\hline 
+\end{tabular}
+
+
+\end{frame}
+
+\subsection{文件操作}
+
+
+\begin{frame}{文件操作}
+
+\begin{tabular}{ll}
+\hline 
+cp file1 file2 & 拷贝文件file1，命名为file2\tabularnewline
+mv file1 file2 & 移动/重命名文件fil1为file2\tabularnewline
+rm file  & 删除文件file\tabularnewline
+rmdir directory & 删除目录directory\tabularnewline
+cat file & 显示文件file的内容\tabularnewline
+more file & 逐屏显示文件file的内容\tabularnewline
+head file & 显示文件file的前10行\tabularnewline
+tail file & 显示文件file的后10行\tabularnewline
+grep 'keyword' file & 在文件file里搜索字符串keyword并显示\tabularnewline
+wc file & 分别统计文件file的行数，单词数和字符数\tabularnewline
+\hline 
+\end{tabular} 
+
+
+\end{frame}
+
+\subsection{重定向和管道}
+
+
+\begin{frame}{重定向与管道}
+
+\begin{tabular}{ll}
+\hline 
+command > file & 将command的输出写入到文件file里\tabularnewline
+command >\textcompwordmark{}>file & 将command的输出追加到文件file里\tabularnewline
+command <file & 从文件file里读内容当做command的输入\tabularnewline
+command1 | command2 & 用管道（pipe）的方式将command1的输出当成command2的输入\tabularnewline
+cat file1 file2 >file0 & 将文件file1,file2合成文件file0\tabularnewline
+sort & 数据排序\tabularnewline
+who & 列出当前登录的用户\tabularnewline
+\hline 
+\end{tabular}
+
+
+\end{frame}
+
+\subsection{通配符}
+
+
+\begin{frame}{通配符}
+\begin{columns}%{}
+
+
+\column{5cm}
+\begin{exampleblock}
+{*}
+
+匹配任意多个字符\\
+\rule[0.5ex]{1\linewidth}{1pt}
+
+\$ ls fglrx{*}
+
+fglrx-amdcccle\_8.632.rpm fglrx-kernel-source.rpm
+
+fglrx-installer\_8.632.changes fglrx-modaliases.rpm
+\end{exampleblock}
+
+\column{5cm}
+\begin{exampleblock}
+? 
+
+匹配任意一个字符
+
+\noindent \rule[0.5ex]{1\linewidth}{1pt}
+
+\$ls list?
+
+list1 list2 list9
+\end{exampleblock}
+\end{columns}%{}
+
+\end{frame}
+
+\subsection{文件权限}
+
+
+\begin{frame}[allowframebreaks]{文件权限}
+
+\includegraphics[scale=0.8]{images/basic/fs-permission}
+
+
+\begin{columns}%{}
+
+
+\column{5cm}
+\begin{exampleblock}
+{chmod }
+
+改变文件或者目录的权限
+
+\noindent \rule[0.5ex]{1\linewidth}{1pt}
+
+\% chmod go-rwx biglist 
+
+\% chmod a+rw biglist \end{exampleblock}
+\begin{alertblock}
+{仅仅文件的所有者或者root账号能改变}
+\end{alertblock}
+
+\column{5cm}
+
+
+\begin{tabular}{cc}
+\hline 
+u & 文件所有者\tabularnewline
+g & 文件属组\tabularnewline
+o & 其他账号\tabularnewline
+a & 所有账号\tabularnewline
+r & 可读\tabularnewline
+w & 可写\tabularnewline
+x & 可执行(可访问目录）\tabularnewline
++ & 增加权限\tabularnewline
+- & 移走权限\tabularnewline
+\hline 
+\end{tabular}
+
+\end{columns}%{}
+
+\end{frame}
+
+\subsection{获取帮助}
+
+
+\begin{frame}{获取帮助}
+\begin{itemize}
+\item 在线帮助
+
+\begin{itemize}
+\item man command
+\item info command
+\item command --help / -h
+\item /usr/share/doc/
+\end{itemize}
+\item 推荐书籍
+
+\begin{itemize}
+\item 红旗系统自带印刷手册
+\item Linux系统管理技术手册第二版（美）奈米斯 / （美）海因 / （美）斯奈德，张辉译，人民邮电出版社）
+\end{itemize}
+\item 获取互联网帮助
+
+\begin{itemize}
+\item \href{http://www.google.com.hk}{googling}
+\item \href{http://www.linuxsir.org}{http://www.linuxsir.org}
+\item \href{http://linux.chinaunix.net}{http://linux.chinaunix.net}
+\item \href{http://blog.wgzhao.com}{http://blog.wgzhao.com}
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+\end{document}

@@ -1,0 +1,39 @@
+%Linux下磁盘识别，及分区
+\documentclass{beamer}
+\input{../style.tex}
+\begin{document}
+\pagestyle{empty}
+
+% For every picture that defines or uses external nodes, you'll have to
+% apply the 'remember picture' style. To avoid some typing, we'll apply
+% the style to all pictures.
+\tikzstyle{every picture}+=[remember picture]
+
+% By default all math in TikZ nodes are set in inline mode. Change this to
+% displaystyle so that we don't get small fractions.
+\everymath{\displaystyle}
+
+\[
+/dev/\tikz[baseline]{\node[fill=blue!50,anchor=base] (t1) {$sd$};}\tikz[baseline]{\node[fill=red!50,anchor=base] (t2) {$a$};} \tikz[baseline]{\node[fill=green!50,anchor=base] (t3) {$3$};} 
+\]
+
+\bigskip 
+
+
+
+\hspace*{15mm}\tikz\node [fill=blue!50,draw,circle] (n1) {}; 磁盘类型,hd=IDE硬盘,sd=SCSI硬盘。(cciss ?)\\
+
+\hspace*{10mm}\tikz\node [fill=red!50,draw,circle] (n2) {}; 磁盘顺序，a是第一个硬盘，b是第二个，以此类推 \\
+
+\tikz\node [fill=green!50,draw,circle] (n3) {}; 分区数，1是第一个分区，2是第二个分区，5是第一个逻辑分区，6是第二个逻辑分区，以此类推;
+
+
+\bigskip
+
+\begin{tikzpicture}[overlay]
+\path  [blue,->] (n1) edge [bend left] (t1);
+\path  [red,->] (n2.north) edge [out=60,in=135] (t2.north west);
+\path  [green,->] (n3.north) edge [out=70,in=140] (t3.north west);
+\end{tikzpicture}
+
+\end{document}

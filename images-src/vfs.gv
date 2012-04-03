@@ -1,0 +1,18 @@
+digraph vfs
+	{
+		ranksep = .6; size = "7.5,15";
+		node [ shape=box,margin="0.1,0.1",width=.1, height=.1];
+		edge [dir=both];
+		VFS -> {Minix;   EXT3};
+		Minix ->buffer;
+		EXT3 -> buffer;
+		buffer -> dd;
+		VFS -> inode;
+		VFS -> dc;
+		buffer [ label="Buffer \n Cache"];
+		dd [ label="Disk Drivers"];
+		inode [ label="Inode \n Cache"];
+		dc [label="Directory\n Cache"];
+		//{rank =same; VFS; inode};
+		{rank = same; Minix; EXT3; dc};
+	}

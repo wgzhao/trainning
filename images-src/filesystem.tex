@@ -1,0 +1,45 @@
+%\documentclass{article}
+%\usepackage{tikz}
+%
+%\begin{document}
+\begin{tikzpicture}[auto,thick]
+	\tikzstyle{node}=%
+[%
+minimum size=10pt,%
+inner sep=0pt,%
+outer sep=0pt,%
+%ball color=example text.fg,
+% circle%
+]
+ 
+\node [node] {/} [-]
+child {node [node] {root}
+edge from parent node {}
+}
+child {node [node] {home}
+child { node [node] {wgzhao} edge from parent node[swap] {}}
+edge from parent node{}
+}
+child {node [node] {bin}
+edge from parent node[swap]{}
+}
+child {node [node] {sbin}
+edge from parent node{}
+}
+child {node [node] {usr}
+child { node [node] {share} edge from parent node[swap] {}}
+child { node [node] {lib} edge from parent node[swap] {}}
+child { node [node] {include} edge from parent node[swap] {}}
+child { node [node] {bin} edge from parent node[swap] {}}
+child { node [node] {sbin} edge from parent node[swap] {}}
+edge from parent node{}
+}
+child { node [node] {lib}
+edge from parent node{}
+}
+child {node [node] {...}
+edge from parent node{}
+};
+ 
+\end{tikzpicture}
+%\end{document}

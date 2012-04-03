@@ -1,0 +1,319 @@
+\documentclass[compress,trans]{beamer} %trans 适合幻灯片，handout适合讲义
+\input{rfstyle.tex}
+
+\title{红旗 HA Cluster技术交流}
+%\subtitle{红旗\textbf{Linux}技术交流}
+%\author{赵卫国}
+\institute[北京中科红旗软件技术有限公司] % (optional, but mostly needed)
+{北京中科红旗软件技术有限公司}
+%\hypersetup{colorlinks, linkcolor=blue, citecolor=blue,
+%    urlcolor=blue,
+%    plainpages=flase,
+%    pdfcreator=tex,
+%    bookmarksopen=true,
+%    pdfhighlight=/P,
+%    pdfauthor={wgzhao <wgzhao@redflag-linux.com>},
+%    pdfcreator={XeLaTex},
+%    pdftitle={红旗HA Cluster技术交流},
+%    pdfkeywords={ha,cluster},
+%    pdfstartview=FitH,
+%    pdfsubject={红旗HA Cluster 简介},
+%    pdfpagemode=UseOutlines,%UseOutlines, %None, FullScreen, UseThumbs
+%}
+
+
+\date{2009.3}
+
+
+\begin{document}
+
+\maketitle
+
+
+\section{集群的概念}
+\begin{frame}{集群的分类}
+\begin{itemize}
+\item HA (High Availability) 集群
+
+
+\item 负载均衡(Load Balance)集群
+
+\item HPC(High Performance Computing)集群
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}{HA集群}
+\includegraphics[scale=.6]{images/ha/ha-workflow.png} 
+\end{frame}
+
+\begin{frame}{负载均衡集群}
+\includegraphics[scale=.6]{images/ha/lb.png}
+\end{frame}
+
+\begin{frame}{HPC}
+\includegraphics[scale=.5]{images/ha/hpc.png}
+\end{frame}
+
+\begin{frame}{HA集群的构成}
+\begin{itemize}
+  \item 单向待机集群
+  \item 不同业务双向待机集群
+  \item 同一业务双向待机集群
+  \item N＋N 结构
+\end{itemize}
+\end{frame}
+
+\begin{frame}{单向待机集群}
+\includegraphics[scale=.4]{images/ha/active-standby.png}
+\end{frame}
+
+\begin{frame}{不同业务双向待机集群}
+\includegraphics[scale=.6]{images/ha/active-active-m.png}
+\end{frame}
+
+\begin{frame}{同一业务双向待机集群}
+\includegraphics[scale=.6]{images/ha/active-active.png}
+\end{frame}
+
+\begin{frame}{N+N结构}
+\includegraphics[scale=.6]{images/ha/n+n.png}
+\end{frame}
+
+\begin{frame}{HA集群数据共享方式}
+\includegraphics[scale=.6]{images/ha/data-share.png}
+\end{frame}
+
+\section{红旗HA Cluster特征}
+\begin{frame}{红旗HA Cluster特征}
+\includegraphics[scale=.6]{images/ha/ha.png}
+\end{frame}
+
+\begin{frame}{红旗HA Cluster的产品构成}
+\begin{description} 
+\item[Cluster Server] 
+        集群主体,包含所有服务器的高可用性功能。还包含 WebManager 的服务器一端的功能。
+\item[WebManager] 
+ 	群操作的管理工具。使用 Web 浏览器作为用户接口。实体嵌入在Cluster Server 中 , 通 过 管 理 终
+端 上 的 Web 浏 览 器 进 行 操 作 , 据 此 与 Cluster Server 主体区分。
+\item[Builder]   
+	Cluster 配置信息的创建工具。与 WebManager 相同,使用 Web 浏览器作为用户接口。在使用 Builder 的终端上,Builder
+需要与 Cluster Server 分开安 装。
+\end{description}
+\end{frame}
+
+\begin{frame}{红旗HA Cluster软件构成}
+\includegraphics[scale=.6]{images/ha/ha-arch.png}
+\end{frame}
+
+\begin{frame}{共享磁盘型的典型配置}
+\includegraphics[scale=.5]{images/ha/se-setup.png}
+\end{frame}
+
+\begin{frame}{镜像磁盘型的典型配置}
+\includegraphics[scale=.5]{images/ha/le-setup.png}
+\end{frame}
+
+
+\begin{frame}[containsverbatim]{字符管理界面}
+%\includegraphics[scale=.6]{images/ha/climanager.png}
+\fontsize{7pt}{2}
+\begin{verbatim}
+======================== CLUSTER STATUS ==================
+  Cluster : cluster             
+  <server>
+   *server1 .........: Online           server1
+      lanhb1         : Normal           LAN Heartbeat
+      lanhb2         : Normal           LAN Heartbeat
+      diskhb1        : Normal           DISK Heartbeat
+      comhb1         : Normal           COM Heartbeat
+    server2 .........: Online           server2
+      lanhb1         : Normal           LAN Heartbeat
+      lanhb2         : Normal           LAN Heartbeat
+      diskhb1        : Normal           DISK Heartbeat
+      comhb1         : Normal           COM Heartbeat
+  <group>
+      oracle  .......: Online           failover group1
+      current        : server1
+      disk1          : Online           /dev/sdb5
+      exec1          : Online           exec resource1
+      fip1           : Online           10.0.0.11
+     weblogic .......: Online           failover group2
+      current        : server2
+      disk2          : Online           /dev/sdb6
+      exec2          : Online           exec resource2
+      fip2           : Online           10.0.0.12
+  <monitor>
+    diskw1           : Normal           disk monitor1
+    diskw2           : Normal           disk monitor2
+    ipw1             : Normal           ip monitor1
+    pidw1            : Normal           pidw1
+    userw            : Normal           usermode monitor
+ =============================================================
+\end{verbatim}
+\end{frame}
+
+\begin{frame}{图形管理界面}
+\includegraphics[scale=.5]{images/ha/webmanager.png}
+\end{frame}
+
+
+\section{支持情况}
+\begin{frame}{支持的心跳方式}
+在服务器之间互相确认生存状态所使用的资源。
+现在支持的心跳资源如下所示:
+\begin{itemize}
+  \item LAN心跳资源 \\  使用Ethernet的通信。
+  \item 内核模式LAN心跳资源  \\ 使用Ethernet的通信。
+  \item COM心跳资源 \\  使用RS232C(COM)的通信。
+  \item 磁盘心跳资源 \\ 使用共享磁盘上的特定分区(磁盘心跳分区)的通信。仅限共享磁盘配置时使用
+\end{itemize}
+\end{frame}
+
+\begin{frame}{支持的监控对象}
+\begin{itemize}
+  \item Oracle 9i/10g/11g
+  \item DB2	9.x
+  \item PostgreSQL >8.0,PowerGres Plus 2.1/5.0
+  \item MySQL >5.0
+  \item Sybase  >12.5
+  \item Samba	>3.0
+  \item NFS		3.0/4.0
+  \item Apache	>2.0
+  \item Sendmail >8.0
+  \item Tuxedo	>9.0
+  \item OracleAS 10g
+  \item WebLogic >9.0
+  \item Websphere >6.1
+  \item 自定义的应用程序
+\end{itemize}
+\end{frame}
+
+\section{一些概念}
+\begin{frame}{集群对象}
+
+\begin{tabular}{rp{7cm}}
+\multicolumn{2}{c}{在红旗HA Cluster中，使用以下结构管理各种资源} \\
+\hline \hline
+
+集群对象 & 		配置集群的单位。\\
+服务器对象 &		表示实体服务器的对象,属于集群对象。\\
+服务器组对象 & 	捆绑服务器的对象,属于集群对象。\\
+心跳资源对象 & 	表示实体服务器的NW部分的对象,属于服务器对象。\\
+组对象 & 		表示虚拟服务器的对象,属于集群对象。\\
+组资源对象 & 	表示拥有虚拟服务器的资源 (NW、磁盘)的对象,属于组对象。\\
+监视资源对象 & 	表示监视机构的对象,属于集群对象。\\
+\end{tabular}
+\end{frame}
+
+\begin{frame}{资源}
+在集群中,监视端和被监视端的对象都称为资源,分类进行管理。这样不仅能够明确区分监视/被监视的对象,
+     还能够使构建集群或查出故障时的对应更简便。资源分为心跳资源、组资源、监视资源三类。以下简要介绍各类资源。
+\end{frame}
+
+\begin{frame}{心跳资源}
+在服务器之间互相确认生存状态所使用的资源。
+现在支持的心跳资源如下所示:
+\begin{itemize}
+  \item LAN心跳资源 \\  使用Ethernet的通信。
+  \item 内核模式LAN心跳资源  \\ 使用Ethernet的通信。
+  \item COM心跳资源 \\  使用RS232C(COM)的通信。
+  \item 磁盘心跳资源 \\ 使用共享磁盘上的特定分区(磁盘心跳分区)的通信。仅限共享磁盘配置时使用
+\end{itemize}
+\end{frame}
+
+\begin{frame}{组资源}
+\fontsize{7pt}{2}
+   组成失效切换的单位——失效切换组的资源。
+   现在支持的组资源如下所示:
+\begin{itemize}
+  \item 浮动IP资源 (fip) \\ 提供虚拟IP地址。客户端可以像普通IP地址一样访问
+  \item EXEC资源 (exec) \\ 提供启动/停止业务(DB、httpd、etc..)的机制
+  \item 磁盘资源 (disk) \\ 提供共享磁盘上的指定分区。仅限(共享磁盘)配置时使用
+  \item 镜像磁盘资源 (md) \\ 提供镜像磁盘上的指定分区。仅限(镜像磁盘)配置时使用
+  \item 共享型镜像磁盘资源 (hd) \\ 提供共享磁盘或磁盘上的指定分区。仅限(共享型镜像磁盘)配置时使用
+  \item RAW资源 (raw) \\ 提供共享磁盘上的RAW设备。仅限共享磁盘配置时使用
+  \item VxVM磁盘组资源 (vxdg) \\ 提供共享磁盘上的VxVM磁盘组。与VxVM卷资源一起使用。仅限(共享磁盘)配置时使用
+  \item VxVM卷资源 (vxvol) \\ 提供共享磁盘上的VxVM卷。与VxVM磁盘组资源一起使用。仅限(共享磁盘)配置时使用
+  \item NAS资源 (nas) \\ 连接NAS服务器上的共享资源。(集群服务器并不是作为NAS的服务器端运行的资源。) 
+  \item 虚拟IP资源(vip) \\ 提供虚拟IP地址。可以像访问客户端的普通IP地址一样访问虚拟IP地址。用于配置网络地址在不同区间的远程集群。
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks=.8,allowdisplaybreaks]{监视资源}
+是集群系统内进行监视的主体资源。
+现在支持的监视资源如下所示:
+\begin{itemize}
+  \item IP监视资源 (ipw) \\  提供外部IP地址的监视机构。
+  \item  磁盘监视资源 (diskw) \\ 提供磁盘的监视机构。也可以用于共享磁盘的监视
+  \item 镜像磁盘监视资源 (mdw) \\  提供镜像磁盘的监视机构
+  \item 镜像磁盘接口监视资源 (mdnw) \\ 提供镜像磁盘接口的监视机构
+  \item 共享型镜像磁盘监视资源 (hdw) \\提供共享型镜像磁盘的监视机构
+  \item 共享型镜像磁盘接口监视资源 (hdnw) \\ 提供共享型镜像磁盘接口的监视机构
+  \item PID监视资源 (pidw) \\ 提供EXEC资源启动的进程的生存状态监视功能
+  \item 用户空间监视资源 (userw) \\ 提供用户空间的停止监视机构
+  \item RAW监视资源 (raww) \\ 提供磁盘的监视机构。因为使用RAW设备,read尺寸小,能够减轻系统负担。也可以用
+  于监视共享磁盘
+  \item NIC Link Up/Down监视资源 (miiw) \\ 提供LAN线缆的链接状态的监视机构
+  \item VxVM Deamon监视资源 (vxdw) \\ 提供VxVM的Deamon监视机构。仅限(共享磁盘)结构时使用
+  \item VxVM卷监视资源 (vxvolw) \\ 提供VxVM的卷的监视机构。仅限(共享磁盘)结构时使用
+  \item Multi-Target监视资源 (mtw) \\ 提供捆绑多个监视资源的状态
+  	\item 虚拟IP监视资源(vipw) \\  提供送出虚拟IP资源RIP包的机构
+	\item ARP监视资源(arpw) \\    提供送出浮动IP或虚拟IP资源ARP包的机构
+	\item DB2监视资源 (db2w) \\ 提供IBM DB2数据库的监视机构
+	\item ftp 监视资源 (ftpw) \\ 提供 FTP 服务器的监视机构
+	\item http监视资源 (httpw) \\ 提供HTTP服务器的监视机构
+	\item imap4 监视资源 (imap4w) \\ 提供 IMAP4 服务器的监视机构
+	\item MySQL监视资源 (mysqlw) \\ 提供MySQL数据库的监视机构
+	\item nfs监视资源 (nfsw) \\ 提供nfs文件服务器的监视机构
+	\item Oracle监视资源 (oraclew) \\ 提供Oracle数据库的监视机构
+	\item OracleAS 监视资源(oracleasw) \\提供 Oracle 应用程序服务器的监视机构
+	\item pop3 监视资源(pop3w) \\ 提供 POP3 服务器的监视机构
+	\item PostgreSQL 监视资源 (psqlw) \\ 提供 PostgreSQL 数据库的监视机构
+	\item samba监视资源 (sambaw) \\ 提供samba文件服务器的监视机构
+	\item smtp监视资源 (smtpw) \\ 提供SMTP服务器的监视机构
+	\item Sybase监视资源 (sybasew) \\ 提供Sybase数据库的监视机构
+	\item Tuxedo监视资源 (tuxw) \\ 提供Tuxedo应用程序服务器的监视机构
+	\item Websphere监视资源 (wasw) \\ 提供Websphere应用程序服务器的监视机构
+	\item Weblogic监视资源 (wlsw) \\ 提供Weblogic应用程序服务器的监视机构
+	\item WebOTX 监视资源(otxw) \\ 提供 WebOTX 应用程序服务器的监视机构
+\end{itemize}
+ \end{frame}
+
+\section{要求}
+\begin{frame}{HA Cluster需要的硬件}
+\begin{columns}[t]
+\column{.5\textwidth}
+   RedFlag HA Cluster 在以下架构的服务器上运行。
+   \begin{itemize}
+     \item        IA32
+     \item        x86\_64
+     \item        IA64   (不支持Replicator, Replicator DR,Agent,Alert Service)
+     \item        ppc64  (不支持Replicator, Replicator DR,Agent,Alert Service)
+   \end{itemize}
+\column{.5\textwidth}
+   RedFlag HA Cluster Server 所需的规格如下所示
+   \begin{itemize}
+     \item RS-232C板卡 一个(构建3节点以上集群时不需要)
+     \item Ethernet板卡两个以上
+     \item 共享磁盘
+     \item 镜像用磁盘或镜像用剩余分区
+     \item CD-ROM驱动器
+   \end{itemize}
+      
+\end{columns}
+\end{frame}
+
+\begin{frame}{成功案列}
+\begin{itemize}
+  \item 中国邮政集团
+  \item 中国邮政储蓄银行
+  \item 江西财政厅金财工程
+  \item 江西省信访局信访一期
+  \item 人民银行江西支行同城清算
+  \item 湖南省财政厅国库集中支付
+  \item 湖南省政府信息中心邮件系统
+  \item \ldots \ldots
+\end{itemize}
+\end{frame}
+\end{document}
